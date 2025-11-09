@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hitesh Mishra | Data Scientist & AI Specialist</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css">
   <style>
     * {
       margin: 0;
@@ -38,7 +39,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.5rem 3rem;
+      padding: 1rem 3rem;
       background: rgba(0, 0, 0, 0.3);
       backdrop-filter: blur(10px);
       z-index: 1000;
@@ -46,8 +47,8 @@
     }
     
     .navbar.scrolled {
-      padding: 1rem 3rem;
-      background: rgba(0, 0, 0, 0.6);
+      padding: 0.8rem 3rem;
+      background: rgba(0, 0, 0, 0.7);
     }
     
     .logo {
@@ -131,18 +132,40 @@
       justify-content: center;
       text-align: center;
       padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 30%, rgba(253, 187, 45, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 70%, rgba(178, 31, 31, 0.1) 0%, transparent 50%);
+      z-index: -1;
     }
     
     .hero-content {
       max-width: 900px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .profile-image-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 2rem;
     }
     
     .profile-image {
-      width: 200px;
-      height: 200px;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
       border: 4px solid rgba(255, 255, 255, 0.3);
-      margin: 0 auto 2rem;
       background: linear-gradient(45deg, var(--accent), var(--secondary));
       display: flex;
       align-items: center;
@@ -150,12 +173,32 @@
       font-size: 4rem;
       color: white;
       overflow: hidden;
+      position: relative;
     }
     
     .profile-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
+    }
+    
+    .profile-image::after {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, var(--accent), var(--secondary), var(--primary));
+      z-index: -1;
+      animation: rotate 10s linear infinite;
+    }
+    
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
     
     .hero h1 {
@@ -215,6 +258,7 @@
     .btn-primary:hover {
       background: rgba(255, 255, 255, 0.3);
       transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
     
     .btn-secondary {
@@ -226,6 +270,7 @@
     .btn-secondary:hover {
       background: #ffcc44;
       transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
     
     /* About Section */
@@ -266,6 +311,7 @@
     .highlight-card:hover {
       transform: translateY(-5px);
       background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     }
     
     .highlight-card i {
@@ -274,56 +320,82 @@
       margin-bottom: 1rem;
     }
     
-    /* Gallery Section */
-    .gallery {
+    /* Visiting Faculty Section */
+    .faculty {
       background: rgba(0, 0, 0, 0.1);
     }
     
-    .gallery-container {
+    .faculty-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
+      gap: 2rem;
     }
     
-    .gallery-item {
-      border-radius: 10px;
-      overflow: hidden;
-      position: relative;
-      height: 250px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    .faculty-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 2rem;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       transition: all 0.3s ease;
+      text-align: center;
     }
     
-    .gallery-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    .faculty-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
     }
     
-    .gallery-item img {
+    .faculty-icon {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    
+    /* Gallery Section */
+    .gallery {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    
+    .swiper {
+      width: 100%;
+      height: 500px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    }
+    
+    .swiper-slide {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .swiper-slide img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: all 0.5s ease;
     }
     
-    .gallery-item:hover img {
-      transform: scale(1.1);
-    }
-    
-    .gallery-caption {
+    .slide-content {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      padding: 1rem;
-      background: rgba(0, 0, 0, 0.7);
+      padding: 2rem;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
       color: white;
-      transform: translateY(100%);
-      transition: all 0.3s ease;
     }
     
-    .gallery-item:hover .gallery-caption {
-      transform: translateY(0);
+    .swiper-button-next, .swiper-button-prev {
+      color: var(--accent);
+    }
+    
+    .swiper-pagination-bullet-active {
+      background: var(--accent);
     }
     
     /* Tools Section */
@@ -503,6 +575,30 @@
       to { transform: translateY(0); opacity: 1; }
     }
     
+    /* Floating elements for visual interest */
+    .floating-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+    
+    .floating-element {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+      animation: float 15s infinite linear;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+      100% { transform: translateY(0) rotate(360deg); }
+    }
+    
     /* Responsive styles */
     @media (max-width: 992px) {
       .about-content,
@@ -512,6 +608,18 @@
       
       .nav-links {
         display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        flex-direction: column;
+        padding: 1rem 0;
+        text-align: center;
+      }
+      
+      .nav-links.active {
+        display: flex;
       }
       
       .mobile-menu-btn {
@@ -520,6 +628,10 @@
       
       .navbar {
         padding: 1rem 1.5rem;
+      }
+      
+      .swiper {
+        height: 400px;
       }
     }
     
@@ -546,6 +658,10 @@
       section {
         padding: 3rem 1rem;
       }
+      
+      .swiper {
+        height: 300px;
+      }
     }
   </style>
 </head>
@@ -556,6 +672,7 @@
     <div class="nav-links">
       <a href="#home">Home</a>
       <a href="#about">My Journey</a>
+      <a href="#faculty">Visiting Faculty</a>
       <a href="#gallery">Gallery</a>
       <a href="#tools">Tools & Projects</a>
       <a href="#skills">Skills</a>
@@ -568,10 +685,19 @@
 
   <!-- Hero Section -->
   <section id="home" class="hero fade-in">
+    <div class="floating-elements">
+      <div class="floating-element" style="width: 100px; height: 100px; top: 10%; left: 5%;"></div>
+      <div class="floating-element" style="width: 150px; height: 150px; top: 60%; left: 80%;"></div>
+      <div class="floating-element" style="width: 80px; height: 80px; top: 80%; left: 10%;"></div>
+      <div class="floating-element" style="width: 120px; height: 120px; top: 20%; left: 70%;"></div>
+    </div>
+    
     <div class="hero-content">
-      <div class="profile-image">
-        <i class="fas fa-user"></i>
-        <img src="profile.jpeg" alt="Hitesh Mishra">
+      <div class="profile-image-container">
+        <div class="profile-image">
+          <i class="fas fa-user"></i>
+          <!-- Replace with actual image: <img src="profile.jpg" alt="Hitesh Mishra"> -->
+        </div>
       </div>
       <h1>Hitesh Mishra</h1>
       <h2>Data Scientist | AI & Generative AI Specialist | Business Intelligence</h2>
@@ -625,50 +751,93 @@
     </div>
   </section>
 
+  <!-- Visiting Faculty Section -->
+  <section id="faculty" class="faculty">
+    <h2 class="section-title">Visiting Faculty Experience</h2>
+    <div class="faculty-container">
+      <div class="faculty-card slide-up">
+        <div class="faculty-icon">
+          <i class="fas fa-university"></i>
+        </div>
+        <h3>Mumbai University</h3>
+        <p>Guest lecturer for Data Science and AI courses, mentoring the next generation of technology professionals.</p>
+      </div>
+      <div class="faculty-card slide-up" style="animation-delay: 0.1s;">
+        <div class="faculty-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <h3>Indian Institutes of Technology</h3>
+        <p>Visiting faculty at IITs, delivering specialized sessions on Machine Learning and Business Intelligence.</p>
+      </div>
+      <div class="faculty-card slide-up" style="animation-delay: 0.2s;">
+        <div class="faculty-icon">
+          <i class="fas fa-chalkboard"></i>
+        </div>
+        <h3>Corporate Training</h3>
+        <p>Conducted training programs for working professionals in AI, ML, and data analytics across various industries.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Gallery Section -->
   <section id="gallery" class="gallery">
     <h2 class="section-title">Gallery</h2>
-    <div class="gallery-container">
-      <div class="gallery-item slide-up">
-        <div class="placeholder-image" style="background: linear-gradient(45deg, var(--accent), var(--secondary)); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-          <i class="fas fa-trophy"></i>
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="placeholder-image" style="background: linear-gradient(45deg, var(--accent), var(--secondary)); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+            <i class="fas fa-trophy"></i>
+          </div>
+          <!-- Replace with actual image: <img src="award.jpg" alt="Employee of the Year Award"> -->
+          <div class="slide-content">
+            <h3>Employee of the Year Award</h3>
+            <p>Saregama India Limited - Recognition for outstanding contributions in AI and data science</p>
+          </div>
         </div>
-        <!-- Replace with actual image: <img src="award.jpg" alt="Employee of the Year Award"> -->
-        <div class="gallery-caption">
-          <h3>Employee of the Year Award</h3>
-          <p>Saregama India Limited</p>
+        <div class="swiper-slide">
+          <div class="placeholder-image" style="background: linear-gradient(45deg, var(--primary), var(--accent)); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+            <i class="fas fa-chalkboard-teacher"></i>
+          </div>
+          <!-- Replace with actual image: <img src="teaching.jpg" alt="Teaching at IIT"> -->
+          <div class="slide-content">
+            <h3>Teaching at IIT</h3>
+            <p>Visiting Faculty Session - Sharing knowledge with future technology leaders</p>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="placeholder-image" style="background: linear-gradient(45deg, var(--secondary), var(--primary)); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+            <i class="fas fa-globe-asia"></i>
+          </div>
+          <!-- Replace with actual image: <img src="bhutan.jpg" alt="Bhutan AI Program"> -->
+          <div class="slide-content">
+            <h3>International AI Program</h3>
+            <p>Representing India in Bhutan - Contributing to international AI initiatives</p>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="placeholder-image" style="background: linear-gradient(45deg, var(--accent), var(--primary)); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+            <i class="fas fa-dumbbell"></i>
+          </div>
+          <!-- Replace with actual image: <img src="bodybuilding.jpg" alt="Bodybuilding"> -->
+          <div class="slide-content">
+            <h3>Bodybuilding Passion</h3>
+            <p>Discipline beyond technology - Applying dedication and consistency to personal fitness</p>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="placeholder-image" style="background: linear-gradient(45deg, var(--primary), var(--secondary)); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <!-- Replace with actual image: <img src="workshop.jpg" alt="Workshop"> -->
+          <div class="slide-content">
+            <h3>AI Workshop</h3>
+            <p>Conducting hands-on sessions on Generative AI and Machine Learning applications</p>
+          </div>
         </div>
       </div>
-      <div class="gallery-item slide-up" style="animation-delay: 0.1s;">
-        <div class="placeholder-image" style="background: linear-gradient(45deg, var(--primary), var(--accent)); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-          <i class="fas fa-chalkboard-teacher"></i>
-        </div>
-        <!-- Replace with actual image: <img src="teaching.jpg" alt="Teaching at IIT"> -->
-        <div class="gallery-caption">
-          <h3>Teaching at IIT</h3>
-          <p>Visiting Faculty Session</p>
-        </div>
-      </div>
-      <div class="gallery-item slide-up" style="animation-delay: 0.2s;">
-        <div class="placeholder-image" style="background: linear-gradient(45deg, var(--secondary), var(--primary)); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-          <i class="fas fa-globe-asia"></i>
-        </div>
-        <!-- Replace with actual image: <img src="bhutan.jpg" alt="Bhutan AI Program"> -->
-        <div class="gallery-caption">
-          <h3>International AI Program</h3>
-          <p>Representing India in Bhutan</p>
-        </div>
-      </div>
-      <div class="gallery-item slide-up" style="animation-delay: 0.3s;">
-        <div class="placeholder-image" style="background: linear-gradient(45deg, var(--accent), var(--primary)); height: 100%; display: align-items: center; justify-content: center; color: white; font-size: 3rem; display: flex;">
-          <i class="fas fa-dumbbell"></i>
-        </div>
-        <!-- Replace with actual image: <img src="bodybuilding.jpg" alt="Bodybuilding"> -->
-        <div class="gallery-caption">
-          <h3>Bodybuilding Passion</h3>
-          <p>Discipline beyond technology</p>
-        </div>
-      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
     </div>
   </section>
 
@@ -787,7 +956,6 @@
         </div>
       </div>
       <div class="contact-form">
-        <!-- You can add a contact form here if needed -->
         <div class="highlight-card" style="height: 100%; display: flex; flex-direction: column; justify-content: center; text-align: center;">
           <i class="fas fa-paper-plane" style="font-size: 3rem; margin-bottom: 1rem;"></i>
           <h3>Let's Work Together</h3>
@@ -805,7 +973,28 @@
     </div>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
   <script>
+    // Initialize Swiper
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      autoplay: {
+        delay: 5000,
+      },
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true
+      },
+    });
+    
     // Navbar scroll effect
     window.addEventListener('scroll', function() {
       const navbar = document.querySelector('.navbar');
@@ -831,18 +1020,35 @@
     const navLinks = document.querySelector('.nav-links');
     
     mobileMenuBtn.addEventListener('click', () => {
-      navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+      navLinks.classList.toggle('active');
     });
     
     // Close mobile menu when clicking on a link
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
         if (window.innerWidth <= 992) {
-          navLinks.style.display = 'none';
+          navLinks.classList.remove('active');
         }
       });
     });
+    
+    // Create floating elements dynamically
+    function createFloatingElements() {
+      const container = document.querySelector('.floating-elements');
+      for (let i = 0; i < 8; i++) {
+        const element = document.createElement('div');
+        element.classList.add('floating-element');
+        const size = Math.random() * 100 + 50;
+        element.style.width = `${size}px`;
+        element.style.height = `${size}px`;
+        element.style.top = `${Math.random() * 100}%`;
+        element.style.left = `${Math.random() * 100}%`;
+        element.style.animationDuration = `${Math.random() * 10 + 10}s`;
+        container.appendChild(element);
+      }
+    }
+    
+    createFloatingElements();
   </script>
 </body>
 </html>
-
